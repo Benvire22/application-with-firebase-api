@@ -101,6 +101,7 @@ const AdminPage = () => {
                   type="text"
                   name="title"
                   id="name"
+                  placeholder="Enter page Title"
                   className="form-control fs-5 mb-3 py-2"
                   value={formData.title}
                   onChange={changePageForm}
@@ -111,6 +112,7 @@ const AdminPage = () => {
               <textarea
                 name="content"
                 id="content"
+                placeholder="Enter page content"
                 className="form-control fs-5 mb-3 py-2"
                 value={formData.content}
                 onChange={changePageForm}

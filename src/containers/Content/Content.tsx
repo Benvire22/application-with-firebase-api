@@ -46,7 +46,8 @@ const Content = () => {
             <h1>{pageContent.title}</h1>
             <p>{pageContent.content}</p>
           </div>
-        ) : <h1 className="text-center text-danger">Sorry, this page is not a found!</h1>)}
+        ) : null) // <h1 className="text-center text-danger">Sorry, this page is not a found!</h1>)
+      }
     </>
   );
 };

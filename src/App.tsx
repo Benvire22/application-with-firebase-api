@@ -1,22 +1,16 @@
 import './App.css';
-import {Link, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Content from './containers/Content/Content';
 import AdminPage from './containers/AdminPage/AdminPage';
+import ToolBar from './components/ToolBar/ToolBar';
 
 const App = () => {
   return (
     <>
-      <div>
-        <ul>
-          <li><Link to="/pages/home">Home</Link></li>
-          <li><Link to="/pages/about">About</Link></li>
-          <li><Link to="/pages/service">Our service</Link></li>
-          <li><Link to="/pages/contacts">Contacts</Link></li>
-          <li><Link to="/pages/policy">Policy</Link></li>
-          <li><Link to="/pages/admin">Admin Page</Link></li>
-        </ul>
-      </div>
-      <main className="container-xl">
+      <header>
+        <ToolBar />
+      </header>
+      <main className="container-xl my-3">
         <Routes>
           <Route path="/" element={<Content/>}/>
           <Route path="pages/:pageName" element={<Content/>}/>

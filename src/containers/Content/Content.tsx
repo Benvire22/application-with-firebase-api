@@ -3,6 +3,8 @@ import {useCallback, useEffect, useState} from 'react';
 import axiosApi from '../../axiosApi';
 import {Page} from '../../types';
 import Spinner from '../../components/Spinner/Spinner';
+import Error from '../Error/Error';
+import {handleError} from '../../lib/handleError';
 
 const Content = () => {
   const [pageContent, setPageContent] = useState<Page | null>(null);
@@ -11,20 +13,23 @@ const Content = () => {
   const {pageName} = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!pageName) {
-      navigate('pages/home');
-    }
-  }, [pageName]);
+  if (!pageName) {
+    navigate('pages/home');
+  }
 
   const pagesRequest = useCallback(async () => {
     try {
       setPageLoading(true);
-      const {data} = await axiosApi.get<Page>(`/${pageName}.json`);
-      console.log(data);
+      if (pageName) {
+        const {data} = await axiosApi.get<Page>(`/${pageName}.json`);
+        setPageContent(data);
+      } else {
+        const {data} = await axiosApi.get<Page>(`/home.json`);
+        setPageContent(data);
+      }
 
-      setPageContent(data);
     } catch (e) {
+      handleError(e as Error);
       setIsError(true);
     } finally {
       setPageLoading(false);
@@ -37,17 +42,16 @@ const Content = () => {
 
   return (
     <>
-      {pageLoading && <Spinner />}
+      {pageLoading && <Spinner/>}
       {isError ? (
-        <h1 className="text-center text-danger">Sorry, unexpected Error was occurred!</h1>
+        <Error />
       ) : (
-        pageContent ? (
-          <div>
-            <h1>{pageContent.title}</h1>
-            <p>{pageContent.content}</p>
-          </div>
-        ) : null) // <h1 className="text-center text-danger">Sorry, this page is not a found!</h1>)
-      }
+        pageContent && (
+          <div className="row my-5">
+            <h1 className="text-primary-emphasis text-center mb-5">{pageContent.title}</h1>
+            <p className="fs-3">{pageContent.content}</p>
+          </div>)
+      )}
     </>
   );
 };

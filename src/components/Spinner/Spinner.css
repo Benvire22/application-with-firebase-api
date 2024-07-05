@@ -8,7 +8,7 @@
   left: 0;
   display: flex;
   justify-content: center;
-  /*background: rgba(0, 0, 0, 0.1);*/
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .Spinner-circle {

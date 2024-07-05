@@ -5,8 +5,7 @@ const ToolBar = () => {
     <>
       <nav className="navbar py-3 navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div className="container-xl">
-          <NavLink to="/pages/home" className="navbar-brand">
-          </NavLink>
+          <NavLink to="/pages/home" className="navbar-brand fst-italic fs-2">BRAND</NavLink>
           <button
             className="navbar-toggler"
             type="button" data-bs-toggle="collapse"

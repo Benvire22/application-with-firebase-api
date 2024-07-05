@@ -6,16 +6,12 @@ import Spinner from '../../components/Spinner/Spinner';
 import Error from '../Error/Error';
 import {handleError} from '../../lib/handleError';
 
-const Content = () => {
+const ContentPage = () => {
   const [pageContent, setPageContent] = useState<Page | null>(null);
   const [pageLoading, setPageLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const {pageName} = useParams();
   const navigate = useNavigate();
-
-  if (!pageName) {
-    navigate('pages/home');
-  }
 
   const pagesRequest = useCallback(async () => {
     try {
@@ -25,6 +21,7 @@ const Content = () => {
         setPageContent(data);
       } else {
         const {data} = await axiosApi.get<Page>(`/home.json`);
+        navigate('pages/home');
         setPageContent(data);
       }
 
@@ -34,7 +31,7 @@ const Content = () => {
     } finally {
       setPageLoading(false);
     }
-  }, [pageName]);
+  }, [navigate, pageName]);
 
   useEffect(() => {
     void pagesRequest();
@@ -56,4 +53,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default ContentPage;

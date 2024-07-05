@@ -20,9 +20,9 @@ interface Content {
 
 const AdminPage = () => {
   const [formData, setFormData] = useState<Content>(initialState);
-  const navigate = useNavigate();
-  const [formError, setFormError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [formError, setFormError] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const fetchPage = useCallback(async () => {
     try {
